@@ -5,6 +5,8 @@ import {
   NovaCompositionNavigationArrowRight as ArrowRightIcon,
   NovaCompositionCoorpacademyStar as StarIcon,
   NovaCompositionCoorpacademyTimer as TimerIcon,
+  NovaCompositionCoorpacademyBolt as BoltIcon,
+  NovaSolidSchoolScienceGraduationHat as CertificationIcon,
   NovaCompositionCoorpacademyAdaptive as AdaptiveIcon,
   NovaSolidContentContentBook1 as LearnerIcon
 } from '@coorpacademy/nova-icons';
@@ -12,6 +14,13 @@ import Provider from '../../atom/provider';
 import ProgressBar from '../../molecule/progress-bar';
 import Link from '../../atom/link';
 import style from './progression-item.css';
+
+const ICONS = {
+  chapter: TimerIcon,
+  course: LearnerIcon,
+  battle: BoltIcon,
+  certification: CertificationIcon
+};
 
 const ProgressionItem = (props, context) => {
   const {skin} = context;
@@ -23,12 +32,15 @@ const ProgressionItem = (props, context) => {
     level,
     onClick = noop,
     stars,
+    maxStars,
     state,
     type
   } = props;
   const dark = get('common.dark', skin);
   const primary = get('common.primary', skin);
   const white = get('common.white', skin);
+  console.log(type)
+  const IconType = ICONS[type];
 
   const adaptiveIcon = adaptive ? (
     <div
@@ -54,14 +66,11 @@ const ProgressionItem = (props, context) => {
       </span>
     </Link>
   );
+
   return (
     <div className={disabled ? style.disabled : ''}>
       <div className={style.wrapperTitle}>
-        {type === 'course' ? (
-          <LearnerIcon className={style.iconType} color={dark} />
-        ) : (
-          <TimerIcon className={style.iconType} color={dark} />
-        )}
+        <IconType className={style.iconType} color={dark} />
         <div data-name="activityLabel" className={style.label} title={label}>
           {label}
           {adaptiveIcon}
@@ -74,7 +83,7 @@ const ProgressionItem = (props, context) => {
             color: primary
           }}
         >
-          {stars} <StarIcon className={style.iconStar} color={primary} />
+          <span className={maxStars?style.smallStars: null}>{stars}</span> {maxStars?<span>/{maxStars}</span>: null} <StarIcon className={style.iconStar} color={primary} />
         </div>
       </div>
       <ProgressBar
@@ -95,6 +104,7 @@ const ProgressionItem = (props, context) => {
 ProgressionItem.propTypes = {
   completion: PropTypes.number.isRequired,
   stars: PropTypes.number.isRequired,
+  maxStars: PropTypes.number,
   disabled: PropTypes.bool,
   label: PropTypes.string.isRequired,
   level: PropTypes.string.isRequired,

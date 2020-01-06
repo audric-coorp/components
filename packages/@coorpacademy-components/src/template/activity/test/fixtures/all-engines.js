@@ -18,13 +18,16 @@ export default {
       {
         type: 'learner',
         title: 'Courses',
-        stars: 2100
+        stars: 2100,
+        active: true,
+        onClick: () => console.log('learner')
       },
       {
         type: 'microlearning',
         title: 'Microlearning',
         stars: 0,
         disabled: true,
+        onClick: () => console.log('microlearning'),
         toolTip: {
           preMessage:
             'This feature is currently unavailable on your platform. If you want to activate it, contact your manager or',
@@ -36,18 +39,21 @@ export default {
       {
         type: 'battle',
         title: 'Battles',
-        stars: 23830
+        stars: 23830,
+        onClick: () => console.log('battle')
       },
       {
         type: 'certifications',
         title: 'Certifications',
-        stars: 500
+        stars: 500,
+        onClick: () => console.log('certifications')
       },
       {
         type: 'bonus',
         title: 'Bonus',
         stars: 20,
         disabled: true,
+        onClick: () => console.log('bonus'),
         toolTip: {
           preMessage:
             'This feature is currently unavailable on your platform. If you want to activate it, contact your manager or',
@@ -59,7 +65,7 @@ export default {
     ],
     progressions: [
       {
-        ref: '05',
+        ref: '09',
         completion: 0.3,
         stars: 400,
         disabled: false,
@@ -76,6 +82,7 @@ export default {
         ref: '04',
         completion: 1,
         stars: 700,
+        maxStars: 800,
         disabled: false,
         label: 'Prospectives',
         level: 'Coach',
@@ -84,6 +91,32 @@ export default {
         adaptive: true,
         onClick: () => {
           console.log('chapter');
+        }
+      },
+      {
+        ref: '07',
+        completion: 1,
+        stars: 700,
+        disabled: false,
+        label: 'Prospectives - Base Level',
+        state: 'Launch a battle',
+        type: 'battle',
+        adaptive: false,
+        onClick: () => {
+          console.log('battle');
+        }
+      },
+      {
+        ref: '08',
+        completion: 1,
+        stars: 700,
+        disabled: false,
+        label: 'Jedi certification',
+        state: 'See certification',
+        type: 'certification',
+        adaptive: false,
+        onClick: () => {
+          console.log('certification');
         }
       },
       {

@@ -16,6 +16,10 @@
   position: relative;
   flex: 1 2;
   min-width: 115px;
+  border-top: solid 0px;
+  transition : border 500ms ease-out;
+  cursor: pointer;
+  user-select: none;
 }
 
 .engineIcon {
@@ -29,6 +33,7 @@
   justify-content: center;
   align-items: center;
   align-content: center;
+  transition : top 500ms ease-out;
 }
 
 .score {
@@ -81,6 +86,16 @@
 
 .disabled {
   cursor: help;
+}
+
+.active {
+  border-top: 6px solid;
+  border-top-color: inherit;
+  cursor: default;
+}
+
+.active .engineIcon {
+  top: 0;
 }
 
 .disabled .score,
@@ -149,8 +164,8 @@
     justify-content: flex-end;
     padding-bottom: 8px;
     overflow-x: scroll;
+    top: 0;
   }
-
   .engineStars:first-child {
     border-left: none;
   }

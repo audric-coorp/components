@@ -231,7 +231,6 @@
 
   .allStars {
     height: auto;
-    border-top: 1px solid light;
     min-width: 100%;
     max-width: 100%;
     overflow-x: auto;

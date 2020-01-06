@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
-import {get} from 'lodash/fp';
+import {get, noop} from 'lodash/fp';
 import {
   NovaCompositionCoorpacademyStar as StarIcon,
   NovaCompositionCoorpacademyTimer as TimerIcon,
@@ -65,16 +65,21 @@ ToolTip.contextTypes = {
 
 const EngineStars = (props, context) => {
   const {skin} = context;
-  const {disabled, type, stars, title, toolTip = null} = props;
+  const {disabled, type, stars, title, active= false, onClick = noop,  toolTip = null} = props;
   const dark = get('common.dark', skin);
   const light = get('common.light', skin);
+  const primary = get('common.primary', skin);
   const IconType = ICONS[type];
 
   return (
     <div
       data-tip={disabled}
+      onClick={disabled || active? noop : onClick}
       data-for={disabled && type}
-      className={classnames([style.engineStars, disabled ? style.disabled : ''])}
+      className={classnames([style.engineStars, disabled ? style.disabled : '', active ? style.active : ''])}
+      style={{
+          borderTopColor: primary
+        }}
     >
       <ToolTip toolTip={toolTip} id={type} />
 
@@ -101,7 +106,9 @@ EngineStars.propTypes = {
   type: PropTypes.string.isRequired,
   stars: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  active: PropTypes.bool,
   disabled: PropTypes.bool,
+  onClick: PropTypes.func,
   toolTip: PropTypes.shape({
     preMessage: PropTypes.string,
     linkMessage: PropTypes.string,
