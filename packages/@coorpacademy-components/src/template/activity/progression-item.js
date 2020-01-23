@@ -83,7 +83,7 @@ const ProgressionItem = (props, context) => {
             color: primary
           }}
         >
-          <span className={maxStars?style.smallStars: null}>{stars}</span> {maxStars?<span>/{maxStars}</span>: null} <StarIcon className={style.iconStar} color={primary} />
+          {stars}{maxStars?' /':null}{maxStars?<span className={style.smallStars}>{maxStars}</span>: null} <StarIcon className={style.iconStar} color={primary} />
         </div>
       </div>
       <ProgressBar

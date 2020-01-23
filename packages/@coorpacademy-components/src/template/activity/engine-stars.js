@@ -77,24 +77,23 @@ const EngineStars = (props, context) => {
       onClick={disabled || active? noop : onClick}
       data-for={disabled && type}
       className={classnames([style.engineStars, disabled ? style.disabled : '', active ? style.active : ''])}
-      style={{
-          borderTopColor: primary
-        }}
     >
       <ToolTip toolTip={toolTip} id={type} />
 
       <span
         className={style.engineIcon}
         style={{
-          backgroundColor: light
+          backgroundColor: primary
         }}
       >
-        <IconType className={style.iconHeader} color={dark} width="30" />
+        <IconType className={style.iconHeader} width="30" />
       </span>
-      <div className={style.score}>
+      <div className={style.score} style={{
+          color: active? primary: dark
+        }}>
         <p data-name="star-counter">{stars}</p>
         <span>
-          <StarIcon className={style.iconStar} color={dark} />
+          <StarIcon className={style.iconStar} color={active? primary: dark} />
         </span>
       </div>
       <div className={style.scoreTitle}>{title}</div>
